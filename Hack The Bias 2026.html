@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Hack The Bias 2026</title>
+        <style>
+            * {
+                margin:auto;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                text-align: center;
+                font-family: 'Bahnschrift Light, Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: rgb(176, 231, 192);
+                justify-content: center;
+                align-items: center;
+                padding: 30px;
+            }
+            
+            .button-group {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                justify-content: center;
+                align-items: center;
+            }
+
+            button {
+                background-color: rgb(0, 0, 0);
+                color: rgb(255, 255, 255);
+                border: none;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 12px;
+            }
+
+            button:hover {
+                background-color: rgb(94, 55, 153);
+            }
+
+            button.active {
+                background-color: rgb(94, 55, 153);
+                color: white;
+            }
+
+            .pages {
+                position: relative;
+            }
+
+            .page {
+                background: white;
+                padding: 20px;
+                border-radius: 8px; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                position: absolute;
+            }
+
+            .page.active {
+                opacity: 1;
+                position: static;
+            }
+
+            h1 {
+                color: rgb(0, 0, 0);
+                text-align: center;
+                font-size: 3em;
+                font-weight: 1.5em;
+                font-family: "Lucida Console";
+                text-decoration: underline;
+                
+            }
+
+             h2 {
+                margin-top: 50px;
+            }
+
+            h5 {
+                font-style: italic;
+                color: rgb(0, 0, 0);
+            }
+           
+            ul {
+                text-align: center;
+                list-style-type: circle;
+                list-style-position: inside;
+                font-family: "Bahnschrift Light";
+                position: relative;
+                right: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .pages {
+                color: rgb(255, 255, 255);
+               
+            }
+            
+           /*  #final-note {
+                font-family: "Gill Sans MT";
+            } 
+            
+            #attribution {
+                font-size: 10px;
+                font-style: italic;
+            }*/
+
+            div {
+                margin-left: 100px;
+                margin-right: 100px;
+            }
+            #note-par {
+                background-color: rgb(255, 255, 255);
+                border: dashed 2px;
+                padding: 5px 5px 5px 5px;
+            }
+            #date {
+                text-decoration: underline;
+                font-style: none;
+                background-color: rgb(255, 255, 255);
+                font-weight: bold;
+            }
+            #link-to-top {
+                background-color: rgb(238, 235, 245);
+                width: 120px;
+                height: 50px;
+                padding-top: 30px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            
+        </style>
+        
+    </head>
+    <body>
+        
+        <h1>Hack The Bias 2026</h1>
+        
+        <div>
+        <h2 id="title-Home Page">Table of Contents</h3>
+        
+        <ul class="table-of-contents">
+            <li> <a href="#post-one"> Post #1 </a></li>
+            <li> <a href="#post-two"> Post #2 </a></li>
+            <li> <a href="#post-three"> Post #3 </a> </li>
+            <li> <a href="#post-four"> Post #4 </a> </li>
+        </ul>
+        
+        <ul class="table-of-contents">
+            <li> <a href="#post-five"> Post #5 </a> </li>
+            <li> <a href="#post-six"> Post #6 </a> </li>
+            <li> <a href="#post-seven"> Post #7 </a> </li>
+            <li> <a href="#post-eight"> Post #8 </a> </li>
+        </ul>
+        
+        <ul class="table-of-contents">
+            <li> <a href="#post-nine"> Post #9 </a> </li>
+            <li> <a href="#post-ten"> Post #10 </a> </li>
+        </ul>
+        
+        <hr>
+        
+        </div>
+
+        <div>
+        <h2 id="post-one" class="posts">Post #1</h2>
+        <h5>March 29, 2024</h5>
+        
+        <p>I started to get back into coding again, as it was one of my SMART goals. I want to be able to complete the HTML and CSS Lessons on Khan Academy soon in order to create my own website in the near future. All I did today was go over some of the lessons I had done before (almost a year ago) to refresh my memory and tomorrow I hope to learn some more new skills.</p>
+        
+        
+        <h2 id="post-two" class="posts">Post #2</h2>
+        <h5>March 30, 2024</h5>
+        
+        <p>Today was a big day. I learnt so much new stuff, I have no idea how I'm going to remember it all. Anyways, this coding stuff is a lot more fun than I expected, I dunno why I stopped learning before. Either way, I'm feeling a lot more ready to start my website and finally figured out how I'm gonna do it. Using Notepad and doing all this, that, whatever.<em> I'm gonna make a website!</em></p>
+        
+        
+        <h2 id="post-three" class="posts">Post #3</h2>
+        <h5>March 31, 2024</h5>
+        
+        <p>Today I learnt about some new CSS styling techniques which I didn't even know were possible like "text-decoration" and "font-weight" which were not only surprising but also extremely helpful. I hope to finish the project I am working on, which is the create a Blog lol.</p>
+        
+        
+        <h2 id="post-four" class="posts">Post #4</h2>
+        <h5>April 1, 2024</h5>
+        
+        <p>April Fools. I have no joke... More skills learnt today, mostly just CSS techniques. I also installed some apps to start coding rather than just using Khan Academy. I first tried using Notepad but after trying out Visual Studio Code, I don't think I'll go back. Of course, I still have a lot more to learn, but I'm getting there.</p>
+        
+        
+        <h2 id="post-five" class="posts">Post #5</h2>
+        <h5>April 2, 2024</h5>
+        
+        <p>Didn't really do too much today. Watched a couple videos on how to use different coding softwares as well as some other CSS techniques not taught on Khan Academy. Still a good day though, progress made...</p>
+        
+        
+        <h2 id="post-six" class="posts">Post #6</h2>
+        <h5>April 3, 2024</h5>
+        
+        <p>Watched some more videos of CSS tools. Most of them were about different tags like inline, descendants, pseudo classes, and specificity. I'm probably not going to use these, just because I'm going to forget that they exist and end up taking the long way with multiple id's and classes.</p>
+        
+        
+        <h2 id="post-seven" class="posts">Post #7</h2>
+        <h5>April 4, 2024</h5>
+        
+        <p>Took a break. No <em>coding</em> done today :)</p>
+        
+        
+        <h2 id="post-eight" class="posts">Post #8</h2>
+        <h5>April 5, 2024</h5>
+        
+        <p>Explored the HTML code of different websites to see what and how they were able to get that certain view. Might incorprate some in my own website. I'm still really impressed by the number of different styles and techniques CSS provides, it's no wonder it's become a completely separate language.</p>
+        
+        
+        <h2 id="post-nine" class="posts">Post #9</h2>
+        <h5>April 6, 2024</h5>
+        
+        <p>Made some edits to this project ("A Coder's Blog"). Realized that the links for the first four posts were not working so I had to rearrange the lists. Added a <em>Back To Top</em> button to decrease the amount of scrolling.</p>
+        
+        
+        <h2 id="post-ten" class="posts">Post #10</h2>
+        <h5>April 7, 2024 - April 13, 2024</h5>
+        
+        <p>Guess what? I did nothing this week. At least no coding. The teacher's just have to give us loads of homework right after break. So that's what I've been doing ☹️. Hopefully there's less work next week. 🤞 </p>
+        <br>
+        <hr>
+        <br>
+        
+        <p id="final-note">Thank you for visitng my blog. Will update tomorrow!</p>
+        
+        <img src="https://cdn.kastatic.org/third_party/javascript-khansrc/live-editor/build/images/avatars/duskpin-seed.png" >
+        
+        <br>
+        
+        <p id="attribution">Last updated 04/14/2024</p>
+        
+        <br>
+        
+        <p id="link-to-top"> <a href="#title-table-of-contents">Back To Top </a> </p>
+        
+        </div>
+        
+    </body>
+</html>
