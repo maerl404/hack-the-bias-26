@@ -138,7 +138,8 @@
             text-align: center;
         }
     </style>
-    <script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 </head>
 
 <body>
@@ -270,7 +271,23 @@
     <div id="graph" style="width:600px;height:250px;margin:20px;"></div>
   
     <!-- Link external Javascript file -->
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+
+
+  <div id="myPlot" style="width:100%;max-width:700px"></div>
+<script>
+    const xArray = ["Got a scholarship", "Applied, but no scholarship", "Did not apply (overwhelmed, unqualified, lack of resources)"];
+    const yArray = [4, 15, 81];
+
+    const layout = { title: "Scholarship Applicants" };
+
+    const data = [{ labels: xArray, values: yArray, type: "pie" }];
+
+    Plotly.newPlot("myPlot", data, layout);
+</script>
+
+</script>
+
 </body>
 
 </html>
