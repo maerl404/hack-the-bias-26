@@ -287,7 +287,7 @@
     <!---------- Page 1 / Home Page ---------->
     <div class="page active" id="page1">
     
-        <h2 style="color: #0b4b3e;">Survivorship bias hides real barriers</h2>
+        <h2>Survivorship bias hides real barriers</h2>
 
         <p>Visible winners = <strong>noise</strong>. Everyone else = <strong>silence</strong>.</p>
 
@@ -544,9 +544,25 @@
 
 </div>
 
-<script>
-    /* ======== JavaScript for Page Navigation ========== */
+  <div id="myPlot" style="width:100%;max-width:700px"></div>
 
+<script>
+    /* ======== JavaScript for Page Navigation ========== *    
+  
+    /* Link external Javascript file */
+
+    /* ======== Plotly Pie Chart for Page 2 ======== */
+
+    const xArray = ["Got a scholarship", "Applied, but no scholarship", "Did not apply (overwhelmed, unqualified, lack of resources)"];
+    const yArray = [4, 15, 81];
+
+    const layout = { title: "Scholarship Applicants" };
+
+    const data = [{ labels: xArray, values: yArray, type: "pie" }];
+
+    Plotly.newPlot("myPlot", data, layout);
+
+   /* ======== JavaScript to handle page navigation ======== */
         const pageButtons = document.querySelectorAll('.page-btn')
         const pages = document.querySelectorAll('.page');
 
@@ -617,7 +633,7 @@
     /* JavaScript for Auditing Dashboard */
 
     function getPlotTheme() {
-        const dark = document.body.classLIST.contains('dark-mode');
+        const dark = document.body.classList.contains('dark-mode');
         
         return {
             paper_bgcolor: dark ? '#2C3E50' : 'white',
@@ -642,8 +658,8 @@
         const theme = getPlotTheme();
 
         Plotly.newPlot('auditChart', [{
-            x: ['Received Scholarship', 'Did Not Receive Scholarship'],
-            y: [yes, no],
+            labels: ['Received Scholarship', 'Did Not Receive Scholarship'],
+            values: [yes, no],
             type: 'pie',
             marker: {
                 colors: ['#2ca02c', '#d62728']
@@ -690,7 +706,7 @@
         // Normalize score to percentage
         let maxScore = 
             (4 * 5) + // education
-            (6 * 20) +  // gpa
+            (7 * 20) +  // gpa
             (1 * 10) + // sports
             (1 * 20) + // leadership
             (1 * 15) + // volunteer
@@ -704,8 +720,9 @@
             <div>Your estimated chance of receiving scholarships is:</div>
             <div class="prediction-percent">${chance}%</div>
         </div>
-        <p style="margin-top: 20px;">
+        <p style="margin-top: 40px; margin-bottom: 40px;">
             Please note that this is a statistical estimate and does not reflect your personal worth or potential.</p>
+            <br>
             <br>
         <p><strong>Survivorship bias warning:</strong> note that many successful students may have had lower predictions
             due to unseen factors. Use this as a guide, not a limit.</p>
