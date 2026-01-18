@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond the Success Story</title>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <link   rel="shortcut icon"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E👁️%3C/text%3E%3C/svg%3E">   
+            
+    <style>
+
+        /* ================== */
+        /* Base Styling */
+        /* ================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            font-family: "Livvic", sans-serif;
+            background-color: rgb(176, 231, 192);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .site-header {
+            background-color:  #062922;
+            width: 100vw;
+            padding: 30px 20px;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            margin-top: calc(-50vw + 50%);
+        }
+
+        h1, h2, h3 {
+            margin-top: 25px;
+            color:#0b4b3e
+        }
+
+        .site-header h1 {
+            color: white;
+            font-size: 50px;
+            text-decoration: underline
+        }
+
+        li {
+            color: rgb(29, 74, 74);
+            list-style-position: inside;
+            margin-bottom: 15px;
+        }
+
+        /* Buttons */
+
+        .button-group {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* responsive to screen size */
+        }
+
+        button {
+            background-color: #2C3E50;
+            color:white;
+            border: 2px solid #ffffff;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 12px;
+            width: 100px;
+            height: 65px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #16a085;
+            transform: scale(1.1)
+        }
+        
+        button.active {
+            transform: scale(1.05);
+            background-color: #16a085;
+            box-shadow: 0 0 20px rgba(50, 78, 55, 0.5);
+        }
+
+        /* Page Styling */
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+        }
+        .pages {
+            width: 100%;
+        }
+
+        .page {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            display: none;
+            margin-top: 20px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page p {
+            color: rgb(29, 74, 74);
+            font-size: 17px;
+        }
+        
+        /* Forms */
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1.5px solid #020202;
+            border-radius: 4px;
+        }
+
+        
+        /* Graphs / Impact Styling */
+
+        .impact-box {
+            border-left: 6px solid #16a085;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #ecf0f1;
+            text-align:left;
+        }
+
+        .graph-summary {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design Elements */
+
+        @media (max-width: 600px) {
+            .site-header h1 {
+                font-size: 32px;
+            }
+
+            button {
+                width: 140px;
+                height: 50px;
+                font-size: 14px;
+            }
+
+            .page {
+                padding: 20px;
+            }
+        }
+        
+        .prediction-box {
+            margin-top: 40px;
+            padding: 25px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 25);
+        }
+
+        .prediction-percent {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 15px 0;
+        }  
+        
+        /*Dark Mode Styling*/
+        
+        button.dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            background-color: #1f2c39;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #E0E0E0;
+        }
+
+        body.dark-mode .page {
+            background-color: #2C3E50;
+            color: #E0E0E0;
+        }
+
+        body.dark-mode .page p,
+        body.dark-mode li,
+        body.dark-mode label {
+            color: #E0E0E0;
+        }
+
+        body.dark-mode h2,
+        body.dark-mode h3 {
+            color: #9fe3d0;
+        }
+
+        body.dark-mode .impact-box {
+            background-color: #1b3a3a;
+        }
+        
+        body.dark-mode button {
+            background-color: #34495e;
+            color: #E0E0E0;
+            border: 2px solid #E0E0E0;
+        }
+
+        body.dark-mode button.active {
+            background-color: #16a085;
+            color: #FFFFFF;
+            box-shadow: 0 0 20px #16a08580;
+        }
+
+        body.dark-mode input[type="text"], body.dark-mode textarea {
+            background-color: #34495e;
+            color: #E0E0E0;
+            border: 1px solid #E0E0E0;
+        }
+
+        body.dark-mode span[id^="scaleValue"] {
+            color: #E0E0E0;
+        }
+
+        body.dark-mode .prediction-box {
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+    </style>
+</head>
+    
+<body>
+
+<button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+
+    <header class="site-header">
+    <h1>Beyond the Success Story</h1>            
+    </header>
+    
+    
+    <!-- Navigation Bar at the Top -->
+
+    <div class="container">
+
+        <div class="button-group">
+            <button class="page-btn active" data-page="page1">Home</button>
+            <button class="page-btn" data-page="page2">Data and Research</button>
+            <button class="page-btn" data-page="page3">Share Your Experience</button>
+            <button class="page-btn" data-page="page4">Resources & Events</button>
+            <button class="page-btn" data-page="page5">Scholarship Chance Predictor</button>
+        </div>
+
+    <div class="pages">
+
+    <!---------- Page 1 / Home Page ---------->
+    <div class="page active" id="page1">
+    
+        <h2>Survivorship bias hides real barriers</h2>
+
+        <p>Visible winners = <strong>noise</strong>. Everyone else = <strong>silence</strong>.</p>
+
+    <div class="impact-box">
+        <h3>How this platform reduces bias</h3>
+        <ul>
+            <li>Collects hidden student experiences</li>
+            <li>Audits scholarship access patterns</li>
+            <li>Predicts realistic chance at receiving scholarships</li>
+            <li>Connects students to support</li>
+            <li>Raises awareness surrounding the impacts of survivorship bias</li>
+        </ul>
+
+        <h3>What is Survivorship Bias?</h3>
+            <p>Survivorship bias is when people learn only from visible successes — 
+            the <strong>noise</strong> — and ignore hidden failures, which is the 
+            <strong>silence</strong>. This can skew our understanding of reality and 
+            often happens with student scholarships where the focus is on the “winners” 
+            while rejected applications remain unseen.</p>
+
+        <h3>What does Scholarship Visibility mean?</h3>
+            <p>Rather than only looking at those who receive awards, 
+            <strong>scholarship visibility</strong> looks beyond it. It examines who is
+            eligible, who applies, and who receives an award.</p>
+            <p>By understanding the full picture, we can identify barriers and work toward
+            making scholarships more accessible and equitable for all students.</p>
+
+        </div>
+    </div>
+            
+    <!---------- Page 2 / Data and Research ---------->
+    <div class="page" id="page2">
+    
+    <h2>Live Student Experience Audit</h2>
+    
+    <div id="auditChart" style="width: 100%; max-width: 800px; height: 400px; margin: auto;"></div>
+    
+    <div id="auditStats"></div>
+
+    <p class="graphSummary">
+    Anonymous student submission reveal invisible barriers schools usually never see.
+    </p>
+    
+    <br>
+
+    <h2>Survivorship Bias in Scholarships</h2>
+
+    <p style="font-weight: bold;">Many people struggle with finding scholarships. Possible reasons include that:</p>
+            <ul>
+                <li>It doesn't fit their needs</li>
+                <li>Writing essays is difficult</li>
+                <li>There is no access to support</li>
+            </ul>
+        <p style="padding: 10px 10px 50px 50px;">Only a small percentage of students actually apply for scholarships, and an even smaller percentage receive them. 
+            Survivorship bias can lead to unrealistic expectations and discourage students from applying for scholarships. 
+            Systemic barriers such as socioeconomic status, race, and access to resources can further exacerbate the effects of survivorship bias. 
+            The following graph predicts the number of scholarships won each year, yet lacks focus on the number of scholarships people are unable to win. 
+            This is similar to many existing research cases where they did not take survivorship bias into account.</p>
+
+            <br>
+            <br>
+
+            <img src="https://github.com/maerl404/hack-the-bias-26/blob/main/Survivorship%20Bias%20in%20Scholarships%20Infographic.jpeg?raw=true" 
+        alt="Bar chart showing scholarship application outcomes among high school and post-secondary students. 
+        Three categories are displayed: Got a scholarship with 4 students, Applied but no scholarship with 15 students, and Did not apply due to feeling overwhelmed, unqualified, or lacking resources with 81 students. 
+        The data reveals a significant barrier, as the majority of students did not pursue scholarships, highlighting how survivorship bias and systemic barriers disproportionately affect student access to educational funding.", 
+        style="max-width: 100%; height: auto;">                    
+        <br>
+        <br>
+
+        <!-- Plotly.js (For graphs in Data and Research)-->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+            <div id="myPlot" style="width: 100%; max-width: 900px; height: 500px; margin: 20px auto;"></div>
+            <script>
+                window.onload = function () {
+                    const xArray = ["Applied, and received a Scholarship", "Applied, but did not receive a scholarship", "Did not apply due to feeling overwhelmed, unqualified, and a lack of resources"];
+                    const yArray = [4, 15, 81];
+                    const layout = { 
+                        title: {
+                            text: "Scholarship Applicants and Outcomes",
+                            font: {
+                                family: "Livvic, Verdana, Geneva, Tahoma, sans-serif", 
+                                size: 20,
+                                color: "#333",
+                                weight: 'bold'
+                            }
+                        },
+                        font: {
+                            family: "Livvic, Verdana, Geneva, Tahoma, sans-serif", 
+                            size: 12,
+                            color: "#333" 
+                        },
+                        paper_bgcolor: "white",
+                        plot_bgcolor: "white",
+                        hoverlabel: {
+                            namelength: -1,
+                            bgcolor: "white",
+                            bordercolor: "black",
+                            font: {
+                                family: "Livvic, Verdana, Geneva, Tahoma, sans-serif",
+                                size: 12,
+                                color: "black"
+                            }
+                        }
+                    };
+                    const data = [{ 
+                        labels: xArray, 
+                        values: yArray, 
+                        type: "pie",
+                        marker: {
+                            colors: ['#0173B2', '#DE8F05', '#CC78BC']
+                        },
+                        textinfo: "values",
+                        textfont: { 
+                            color: "white", 
+                            size: 20, 
+                            family: "Livvic, Verdana, Geneva, Tahoma, sans-serif" }
+                    }];
+                    Plotly.newPlot("myPlot", data, layout, { responsive: true});
+                };
+            </script>
+
+    </div>
+            
+    <!---------- Page 3 / Share Your Experience ---------->
+    <div class="page" id="page3">
+    
+    <h2>Share Your Experience (Anonymous)</h2>
+
+    <form id="experienceForm" style="max-width: 600px; margin: auto; text-align: left;">
+    
+        <!--- Text Input -->
+        <label>Your Experience</label>
+        <textarea id="message" required></textarea>
+
+        <label>Confidence when applying for scholarships (1 = very little, 10 = very much)</label>
+        <input type="range" id="scale1" min="0" max="10" required>
+
+        <label>First generation student?</label>
+        <select id="firstGen">
+            <option>Yes</option>
+            <option>No</option>
+            <option>Prefer not to say</option>
+        </select>
+
+        <label>Have you previously received a scholarship?</label>
+        <select id="received">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <label>How much do others' success stories discourage you? (1 = very little, 10 = very much)</label>
+        <input type="range" id="scale2" min="0" max="10" required>
+
+        <label for="scale3">Were you aware of survivorship bias before?</label>
+        <select id="aware">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <label>How much has survivorship bias affected your life? (1 = very little, 10 = very much)</label>
+        <input type="range" id="scale3" min="0" max="10" required>
+
+        <button type="submit" style="width: 100% ; padding: 10px; background-color: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px;">Submit</button>
+    </form>    
+
+        <!-- Confirmation Message -->
+        <div id="confirmationMessage" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
+            <h3>Thank you! Your response has been recorded.</h3>
+        </div>
+    </div>
+
+    <!---------- Page 4 / Resources & Events ---------->
+    <div class="page" id="page4">
+
+    <h2>Resources & Events</h2>
+        <p>Connect with future teachers, workshops, and scholarship databases.</p>
+        <p><strong>Remember:</strong> reducing discouragement improves long-term participation in education.</p>
+    </div>
+</div>
+
+    <!---------- Page 5 / Scholarship Chance Predictor ---------->
+    <div class="page" id="page5">
+
+    <h2>Scholarship Probability Predictor</h2>
+
+    <p>A tool that estimates your chances of receiving scholarships based on various factors, helping you make informed decisions about where to apply. The system bases the percentage solely on patterns, not your worth.</p>
+    
+    <form id="predictForm" style="max-width: 500px; margin: auto; text-align: left;">
+
+        <label>Level of Education</label>
+        <select id="educationLevel">
+            <option value="1">Grade 10</option>
+            <option value="2">Grade 11</option>
+            <option value="4">Grade 12</option>
+            <option value="3">Undergraduate</option>
+        </select>
+
+        <label>GPA Range</label>
+        <select id="gpa">
+            <option value="1">50</option>
+            <option value="2">50-60</option>
+            <option value="3">60-70</option>
+            <option value="4">70-80</option>
+            <option value="5">80-90</option>
+            <option value="6">90-95</option>
+            <option value="7">95+</option>
+        </select>
+
+        <label>Do you play any sports?</label>
+        <select id="sports">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Do you have any leadership roles?</label>
+        <select id="leadership">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Do you volunteer often?</label>
+        <select id="volunteer">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Are you a first generation student?</label>
+        <select id="firstGenPredictor">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Financial Need (1 = very little, 10 = very much)</label>
+        <select id="financialNeed">
+            <option value="1">Very Little</option>
+            <option value="2">Little</option>
+            <option value="3">Some</option>
+            <option value="4">Moderate</option>
+            <option value="5">High</option>
+            <option value="6">Very High</option>
+        </select>
+
+        <button type="submit" style="width: 100% ; padding: 10px; background-color: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px;">Predict</button>
+        
+    </form> 
+
+    <div id="predictionResult"></div>
+
+</div>
+
+</div>
+
+</div>
+
+  <div id="myPlot" style="width:100%;max-width:700px"></div>
+
+<script>
+    /* ======== JavaScript for Page Navigation ========== *    
+  
+    /* Link external Javascript file */
+
+    /* ======== Plotly Pie Chart for Page 2 ======== */
+
+    const xArray = ["Got a scholarship", "Applied, but no scholarship", "Did not apply (overwhelmed, unqualified, lack of resources)"];
+    const yArray = [4, 15, 81];
+
+    const layout = { title: "Scholarship Applicants" };
+
+    const data = [{ labels: xArray, values: yArray, type: "pie" }];
+
+    Plotly.newPlot("myPlot", data, layout);
+
+   /* ======== JavaScript to handle page navigation ======== */
+        const pageButtons = document.querySelectorAll('.page-btn')
+        const pages = document.querySelectorAll('.page');
+
+        pageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Get the target page ID from the button's data attribute
+                const targetPageId = button.getAttribute('data-page');
+
+                // Remove the active class from all buttons and pages
+                pageButtons.forEach(btn => btn.classList.remove('active'));
+                pages.forEach(page => page.classList.remove('active'));
+
+                // Add the active class to the clicked button and the corresponding page
+                button.classList.add('active');
+                document.getElementById(targetPageId).classList.add('active');
+
+                if (targetPageId === 'page2') {
+                    drawAudit();
+                }
+            });
+        });
+
+    /* ======== JavaScript for Dark Mode Toggle ========== */
+    
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    }
+
+   /* JavaScript for Storage of Form Data */
+
+    let responses = JSON.parse(localStorage.getItem('responses')) || [];
+
+   /* ======== JavaScript for Form Submission ========== */
+    
+   experienceForm.onsubmit = e => {
+    e.preventDefault();
+
+    const data = {
+        confidence: scale1.value,
+        firstGen: firstGen.value,
+        received: received.value,
+        discouraged: scale2.value,
+        aware: aware.value
+    };
+
+    responses.push(data);
+    localStorage.setItem('responses', JSON.stringify(responses));
+
+    drawAudit();
+
+    experienceForm.style.display="none";
+    confirmationMessage.style.display="block";
+
+    // Optionally, reset the form after submission after 15 seconds
+        setTimeout(() => {
+            experienceForm.reset();
+            experienceForm.style.display = 'block';
+            confirmationMessage.style.display = 'none';
+            document.getElementById('scaleValue1').textContent = '5';
+            document.getElementById('scaleValue2').textContent = '5';
+            document.getElementById('scaleValue3').textContent = '5';
+            document.getElementById('scaleValue4').textContent = '5';
+        }, 15000);
+    };
+
+    /* JavaScript for Auditing Dashboard */
+
+    function getPlotTheme() {
+        const dark = document.body.classList.contains('dark-mode');
+        
+        return {
+            paper_bgcolor: dark ? '#2C3E50' : 'white',
+            plot_bgcolor: dark ? '#2C3E50' : 'white',
+            font: {
+                color: dark ? '#E0E0E0' : '#000000',
+                family: 'Livvic, sans-serif'
+            }
+        };
+    }
+
+    function drawAudit(){
+
+        if(responses.length===0) {
+            responses = [{received: 'No' }]
+        
+        }
+        
+        let yes = responses.filter(r=>r.received==='Yes').length;
+        let no = responses.filter(r=>r.received==='No').length;
+
+        const theme = getPlotTheme();
+
+        Plotly.newPlot('auditChart', [{
+            labels: ['Received Scholarship', 'Did Not Receive Scholarship'],
+            values: [yes, no],
+            type: 'pie',
+            marker: {
+                colors: ['#2ca02c', '#d62728']
+            }
+        }], {
+            xaxis: { title: 'Outcome' },
+            yaxis: { title: 'Number of Students' },
+            title: 'Scholarship Receipt Audit',
+            ...theme
+        }, {responsive: true});
+
+        auditStats.innerHTML = `
+            <p>Total Responses: ${responses.length}</p>
+            <p>Success rate: ${Math.round((yes / responses.length) * 100)}%</p>
+        `;
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+       
+        drawAudit(); // Redraw audit chart to apply theme changes
+    }
+
+    /* JavaScript for Scholarship Chance Predictor */
+
+    predictForm.onsubmit = e => {
+        e.preventDefault();
+
+        // Simple scoring algorithm based on form inputs
+        let score = 0;
+        score += Number(educationLevel.value) * 5;
+        score += Number(gpa.value) * 20;
+        score += Number(sports.value) * 10;
+        score += Number(leadership.value) * 10;
+        score += Number(volunteer.value) * 15;
+        score += Number(firstGenPredictor.value) * 5;
+        score += Number(financialNeed.value) * 15;
+
+        let probability = Math.min(95, Math.max(5, score)); // Clamp between 5% and 95%
+
+        // Normalize score to percentage
+        let maxScore = 
+            (4 * 5) + // education
+            (7 * 20) +  // gpa
+            (1 * 10) + // sports
+            (1 * 20) + // leadership
+            (1 * 15) + // volunteer
+            (1 * 10) + // first gen
+            (6 * 15);  // financial need
+
+        let chance = Math.min(100, Math.round((score / maxScore) * 100));
+
+        predictionResult.innerHTML = `
+        <div class="prediction-box">
+            <div>Your estimated chance of receiving scholarships is:</div>
+            <div class="prediction-percent">${chance}%</div>
+        </div>
+        <p style="margin-top: 40px; margin-bottom: 40px;">
+            Please note that this is a statistical estimate and does not reflect your personal worth or potential.</p>
+            <br>
+            <br>
+        <p><strong>Survivorship bias warning:</strong> note that many successful students may have had lower predictions
+            due to unseen factors. Use this as a guide, not a limit.</p>
+        `;
+
+       };
+    </script>
+
+</body>
+</html>
