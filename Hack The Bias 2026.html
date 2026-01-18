@@ -492,7 +492,27 @@
             </div>
         </div>
 
-    <!-- JavaScript to handle Page Navigation -->
+    
+  
+    <!-- Link external Javascript file -->
+
+    <!-- <script src="script.js"></script> -->
+
+
+  <div id="myPlot" style="width:100%;max-width:700px"></div>
+<script>
+    const xArray = ["Got a scholarship", "Applied, but no scholarship", "Did not apply (overwhelmed, unqualified, lack of resources)"];
+    const yArray = [4, 15, 81];
+
+    const layout = { title: "Scholarship Applicants" };
+
+    const data = [{ labels: xArray, values: yArray, type: "pie" }];
+
+    Plotly.newPlot("myPlot", data, layout);
+</script>
+
+
+    <!-- JavaScript to handle page navigation -->
      <script>
         const pageButtons = document.querySelectorAll('.page-btn')
         const pages = document.querySelectorAll('.page');
