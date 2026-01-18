@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <title>Hack The Bias 2026</title>
+    <title>Beyond the Success Story</title>
     <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👁️</text></svg>">
     <style>
         * {
             margin: 0;
@@ -20,11 +20,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 50px;
+            padding: 20px;
+            width: 100%;
         }
 
-         h1 {
-            color: rgb(14, 9, 9);
+        /* Header Styling */
+        .site-header {
+            background-color:  #062922;
+            width: 100vw;
+            padding: 30px 20px;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            margin-top: calc(-50vw + 50%);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .site-header h1 {
+            color: white;
+            font-size: 50px;
+            margin: 0;
+            text-decoration: underline
+        }
+        
+        /* Heading Styling */
+
+        h1 {
+            color: rgba(8, 3, 12, 0.911);
             text-align: center;
             font-size: 50px;
             font-family: "Livvic", "Verdana", Geneva, Tahoma, sans-serif;
@@ -35,16 +56,61 @@
         h2 {
             margin-top: 50px;
         }
-        
-        ul {
-            color: black;
+
+        h3 {
+            color: rgb(59, 158, 123);
+            margin-top: 20px;
+            margin-bottom: 5px;
+            font-size: 15px;
             text-align: center;
-            list-style-type: circle;
+        }
+        
+        li {
+            color: rgb(29, 74, 74);
+            text-align: justify;
+            list-style-type: disc;
             list-style-position: inside;
             font-family: "Verdana", Geneva, Tahoma, sans-serif;
-            position: relative;
-            right: 20px;
+            margin-left: 250px;
             margin-bottom: 30px;
+            size: 20px;
+        }
+
+        img {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .centered-list {
+            padding-left: 0 !important;
+            text-align: center;
+            list-style-position: inside;
+        }
+
+
+        /* Share Your Experience Form Styling */
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            color: #020202;
+            font-size: 14px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #020202;
+            border-radius: 4px;
+            font-family: "Livvic", "Verdana", Geneva, Tahoma, sans-serif;
+        }
+
+        span[id^="scaleValue"] {
+            display: block; 
+            text-align: center; 
+            font-family: "Livvic", "Verdana", Geneva, Tahoma, sans-serif;
+            color:rgba(0, 0, 0, 0.8);
         }
 
         /* Container for the Button Styling */
@@ -89,30 +155,37 @@
             position: relative;
             color: rgb(255, 255, 255);
             margin-top: 20px;
+            width: 100%;
+            max-width: 1000px;
         }
 
         .page {
             background: white;
-            padding-top: 20px;
-            padding-bottom: 20px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             opacity: 0;
-            position: absolute;
+            display: none;
+            margin: 0 auto;
+            width: 100%;
+            padding: 40px;
+            max-width: 1000px;
         }
 
         .page.active {
-            opacity: 0.8;
-            position: static;
+            opacity: 1;
+            display: block;
         }
 
         .page h2 {
             color: black;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
         }
 
         .page p {
-            color: gray;
+            color: rgb(29, 74, 74);
+            font-size: 18px;
+            margin-bottom: 20px;
         }
 
         .page-content {
@@ -126,7 +199,8 @@
         }
 
         .page-content li {
-            color: gray;  
+            color: rgb(29, 74, 74);
+            font-size: 18px;
         }
 
         .page-content li:before {
@@ -134,7 +208,11 @@
             left: 0;
             color: black;
         }
-          
+        /* Graph Styling */
+        #myPlot {
+            opacity: 1 !important;
+            margin: 20px auto;
+        }
         /*Dark Mode Styling*/
         button.dark-mode-toggle {
             position: fixed;
@@ -176,6 +254,43 @@
         body.dark-mode .page-content li {
             color: #E0E0E0;
         }
+        
+        body.dark-mode button {
+            background-color: #34495e;
+            color: #E0E0E0;
+            border: 2px solid #E0E0E0;
+        }
+
+        body.dark-mode button.active {
+            background-color: #16a085;
+            color: #FFFFFF;
+            box-shadow: 0 0 20px #16a08580;
+        }
+
+        body.dark-mode h3{
+            color: #16a08580;
+        }
+
+        body.dark-mode p {
+            color: #E0E0E0;
+        }
+
+        body.dark-mode input[type="text"], body.dark-mode textarea {
+            background-color: #34495e;
+            color: #E0E0E0;
+            border: 1px solid #E0E0E0;
+        }
+        
+        body.dark-mode label {
+            color: #E0E0E0;
+        }
+
+        body.dark-mode span[id^="scaleValue"] {
+            color: #E0E0E0;
+        }
+        body.dark-mode li {
+            color: #E0E0E0;
+        }
         </style>
     </head>
     
@@ -183,7 +298,10 @@
 
         <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
 
-        <h1>Welcome to Hack The Bias 2026</h1>
+        <header class="site-header">
+            <h1>Beyond the Success Story</h1>            
+        </header>
+        
         
         <!-- Navigation Bar at the Top -->
         <div class="container">
@@ -198,55 +316,183 @@
 
                 <!-- Page 1 / Home Page (1st screen you see) -->
                 <div class="page active" id="page1">
-                    <h2>Combating Survivorship Bias</h2>
-                    <p>This is the main page. Click the buttons at the top to navigate to a different section</p>
-                    <div class="page-content">
-                        <p>Each page displays a unique part of our website to combat this bias issue</p>
-                    </div>
+                    <h2 style="color: #16a085;">Too many people believe "I did it, I was fine" and don't realize how much of an impact survivorship bias has on others</h2>
+                        <hr>
+
+                    <h2>What is Survivorship Bias?</h2>
+                       <p>Survivorship bias is when people learn only from visible successes — 
+                        the <strong>noise</strong> — and ignore hidden failures, which is the 
+                        <strong>silence</strong>. This can skew our understanding of reality and 
+                        often happens with student scholarships where the focus is on the “winners” 
+                        while rejected applications remain unseen.</p>
+
+                        <br>
+
+                    <h2>What does Scholarship Visibility mean?</h2>
+                        <p>Rather than only looking at those who receive awards, 
+                        <strong>scholarship visibility</strong> looks beyond it. It examines who is
+                        eligible, who applies, and who receives an award.</p>
+                        <p>By understanding the full picture, we can identify barriers and work toward
+                        making scholarships more accessible and equitable for all students.</p>
+
+                        <br>
+
+                <div class="page-content">
+                    <h2>Why does this matter?</h2>
+                    <ul class="centered-list">
+                        <li>Encourages a more realistic perspective on success</li>
+                        <li>Helps identify barriers to access and equity</li>
+                        <li>Promotes inclusivity in scholarship opportunities</li>
+                        <li>Empowers students to make informed decisions</li>
+                    </ul>
                 </div>
+            </div>
+
             
                 <!-- Page 2 / Data and Research -->
                 <div class="page" id="page2">
-                    <h2>Data and Research</h2>
-                    <p>Stay informed about how survivorship bias is affecting the lives of high school and post-secondary students</p>
+                    <h2>Real-Life vs. Research</h2>
+                        <hr>
+                        <hr>
+                        <br>
+                        <br>
+                    <p style="font-weight: bold;">Many people struggle with finding scholarships. Possible reasons include that:</p>
                         <ul>
-                            <li>Info</li>
-                            <li>Info</li>
-                            <li>info</li>
-                            <li>info</li>
+                            <li>It doesn't fit their needs</li>
+                            <li>Writing essays is difficult</li>
+                            <li>There is no access to support</li>
                         </ul>
-                     <!-- Plotly.js (For graphs in Data and Research)-->
-                    <script src="https://cdn.plot.ly/plotly-3.3.0.min.js" charset="utf-8"></script>
-                    <div id="graph" style="width:600px;height:250px;margin:20px;"></div>
+                    <p style="padding: 10px 10px 50px 50px;">Only a small percentage of students actually apply for scholarships, and an even smaller percentage receive them. 
+                        Survivorship bias can lead to unrealistic expectations and discourage students from applying for scholarships. 
+                        Systemic barriers such as socioeconomic status, race, and access to resources can further exacerbate the effects of survivorship bias. 
+                        The following graph predicts the number of scholarships won each year, yet lacks focus on the number of scholarships people are unable to win. 
+                        This is similar to many existing research cases where they did not take survivorship bias into account.</p>
+
+                        <br>
+                        <br>
+
+                        <img src="https://github.com/maerl404/hack-the-bias-26/blob/main/Survivorship%20Bias%20in%20Scholarships%20Infographic.jpeg?raw=true" 
+                    alt="Bar chart showing scholarship application outcomes among high school and post-secondary students. 
+                    Three categories are displayed: Got a scholarship with 4 students, Applied but no scholarship with 15 students, and Did not apply due to feeling overwhelmed, unqualified, or lacking resources with 81 students. 
+                    The data reveals a significant barrier, as the majority of students did not pursue scholarships, highlighting how survivorship bias and systemic barriers disproportionately affect student access to educational funding.", 
+                    width="600", height="400", padding="50px auto">                    
+                    <br>
+                    <br>
+            
+                    <!-- Plotly.js (For graphs in Data and Research)-->
+                    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+                        <div id="myPlot" style="width: 100%; max-width: 900px; height: 500px; margin: 20px auto;"></div>
+                        <script>
+                            window.onload = function () {
+                                const xArray = ["Applied, and received a Scholarship", "Applied, but did not receive a scholarship", "Did not apply due to feeling overwhelmed, unqualified, and a lack of resources"];
+                                const yArray = [4, 15, 81];
+                                const layout = { 
+                                    title: {
+                                        text: "Scholarship Applicants and Outcomes",
+                                        font: {
+                                            family: "Livvic, Verdana, Geneva, Tahoma, sans-serif", 
+                                            size: 20,
+                                            color: "#333",
+                                            weight: 'bold'
+                                        }
+                                    },
+                                    font: {
+                                        family: "Livvic, Verdana, Geneva, Tahoma, sans-serif", 
+                                        size: 12,
+                                        color: "#333" 
+                                    },
+                                    paper_bgcolor: "white",
+                                    plot_bgcolor: "white",
+                                    hoverlabel: {
+                                        namelength: -1,
+                                        bgcolor: "white",
+                                        bordercolor: "black",
+                                        font: {
+                                            family: "Livvic, Verdana, Geneva, Tahoma, sans-serif",
+                                            size: 12,
+                                            color: "black"
+                                        }
+                                    }
+                                };
+                                const data = [{ 
+                                    labels: xArray, 
+                                    values: yArray, 
+                                    type: "pie",
+                                    marker: {
+                                        colors: ['#0173B2', '#DE8F05', '#CC78BC']
+                                    },
+                                    textinfo: "values",
+                                    textfont: { 
+                                        color: "white", 
+                                        size: 20, 
+                                        family: "Livvic, Verdana, Geneva, Tahoma, sans-serif" }
+                                }];
+                                Plotly.newPlot("myPlot", data, layout);
+                            };
+                        </script>
+            
                 </div>
             
                 <!-- Page 3 / Share Your Experience -->
                 <div class="page" id="page3">
                     <h2>Share Your Experience</h2>
-                    <p>We created this website so that students can share 
-                        what they're experiences with survivorship bias has been and how it affects certain minority groups/demographics more seriously</p>
+                    <p>Be part of the solution in bringing awareness and educating people about the impacts of <strong>survivorship bias</strong></p>
+
+                    <br>
+                    <hr>
+                    <br>
+
+                    <form id="experienceForm" style="text-align: left; max-width: 600px; margin: 20px auto;">
+                        <!-- Text Input -->
+                         <h3>Please share your experiences with survivorship bias here:</h3>
+                         
+                         <label for="name">Your Name:</label>
+                         <input type="text" id="name" name="name" required style="width: 100%; padding: 3px; margin: 3px 0; box-sizing: border-box;">
+
+                         <label for="message">Your Experience:</label>
+                         <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box;"></textarea>
+
+                         <!-- Scale of 1-10 Questions -->
+                          <label for="scale1">How confident do you feel about applying for scholarships?</label>
+                          <input type="range" id="scale1" name="scale1" min="0" max="10" required style="width: 100%; margin: 8px 0;">
+                          <span id="scaleValue1">5</span>
+
+                          <label for="scale2">How often do you feel discouraged by success stories</label>
+                          <input type="range" id="scale2" name="scale2" min="0" max="10" required style="width: 100%; margin: 8px 0;">
+                          <span id="scaleValue2">5</span>
+
+                          <label for="scale3">How aware are you of survivorship bias?</label>
+                          <input type="range" id="scale3" name="scale3" min="0" max="10" required style="width: 100%; margin: 8px 0;">
+                          <span id="scaleValue3">5</span>
+
+                          <label for="scale4">How much do you think survivorship bias has affected your decisions?</label>
+                          <input type="range" id="scale4" name="scale4" min="0" max="10" required style="width: 100%; margin: 8px 0;">
+                          <span id="scaleValue4">5</span>
+
+                          <button type="submit" style="width: 100% ; padding: 10px; background-color: #16a085; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px;">Submit Your Experiences</button>
+                    </form>
+
+                    <!-- Confirmation Message -->
+                    <div id="confirmationMessage" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
+                        <h3>Thank you! Your response has been recorded.</h3>
+                    </div>
                 </div>
 
                 <!-- Page 4 / Resources & Events -->
                 <div class="page" id="page4">
                     <h2>Resources & Events</h2>
                     <p>Find resources and events to help you combat survivorship bias in your own life</p>
-                        <ul>
-                            <li>Info</li>
-                            <li>Info</li>
-                            <li>info</li>
-                            <li>info</li>
-                        </ul>
+                    <p>Support from future educators, where students can connect to 3rd/4th year students becoming teachers and 
+                    chat about how bias will be reduced in classrooms. Hosts online events focusing on awareness and support  
+                    - scholarship application workshops, school visits and talks by researchers on the impacts of bias in education 
+                    - helps make this problem visible and discussable. Building confidence and resilience</p>
+                   
                 </div>
             </div>
         </div>
 
-    
-  
-    <!-- Link external Javascript file -->
-    <script src="script.js"></script>
-
-    <!-- JavaScript to handle page navigation -->
+    <!-- JavaScript to handle Page Navigation -->
      <script>
         const pageButtons = document.querySelectorAll('.page-btn')
         const pages = document.querySelectorAll('.page');
@@ -274,6 +520,59 @@
         const darkModeToggle = document.querySelector('.dark-mode-toggle');
         darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
     }
+    </script>
+
+    <!-- JavaScript for Form Submission -->
+    <script>
+        const experienceForm = document.getElementById('experienceForm');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        // Update the range slider values as the user moves them
+        document.getElementById('scale1').addEventListener('input', function() {
+            document.getElementById('scaleValue1').textContent = this.value;
+        });
+
+        document.getElementById('scale2').addEventListener('input', function() {
+            document.getElementById('scaleValue2').textContent = this.value;
+        });
+
+        document.getElementById('scale3').addEventListener('input', function() {
+            document.getElementById('scaleValue3').textContent = this.value;
+        });
+
+        document.getElementById('scale4').addEventListener('input', function() {
+            document.getElementById('scaleValue4').textContent = this.value;
+        });
+
+        // Handle form submission
+        experienceForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+        // Here you can get the form values sent to a another server for the database
+        const name = document.getElementById('name').value;
+        const message = document.getElementById('message').value;
+        const scale1 = document.getElementById('scale1').value;
+        const scale2 = document.getElementById('scale2').value;
+        const scale3 = document.getElementById('scale3').value; 
+        const scale4 = document.getElementById('scale4').value;
+
+        console.log('Form submitted:', { name, message, scale1, scale2, scale3, scale4 });
+
+        // Show confirmation message + hide the form + show graph of new data
+        experienceForm.style.display = 'none';
+        confirmationMessage.style.display = 'block';
+
+        // Optionally, reset the form after submission after 5 seconds
+        setTimeout(() => {
+            experienceForm.reset();
+            experienceForm.style.display = 'block';
+            confirmationMessage.style.display = 'none';
+            document.getElementById('scaleValue1').textContent = '5';
+            document.getElementById('scaleValue2').textContent = '5';
+            document.getElementById('scaleValue3').textContent = '5';
+            document.getElementById('scaleValue4').textContent = '5';
+        }, 5000);
+    });
     </script>
 
 </body>
